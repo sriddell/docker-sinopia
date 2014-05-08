@@ -1,5 +1,5 @@
 # path to a directory with all packages
-storage: ./storage
+storage: ./public_storage
 
 # a list of users
 users:
@@ -33,11 +33,11 @@ uplinks:
 packages:
   # uncomment this for packages with "local-" prefix to be available
   # for admin only, it's a recommended way of handling private packages
-  #'local-*':
-  #  allow_access: admin
-  #  allow_publish: admin
+  'local-*':
+    allow_access: all
+    allow_publish: admin
   #  # you can override storage directory for a group of packages this way:
-  #  storage: 'local_storage'
+    storage: './private_storage'
 
   '*':
     # allow all users to read packages ('all' is a keyword)
@@ -49,6 +49,7 @@ packages:
 
     # if package is not available locally, proxy requests to 'npmjs' registry
     proxy: npmjs
+
 
 #####################################################################
 # Advanced settings

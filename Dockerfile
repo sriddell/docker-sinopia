@@ -11,9 +11,11 @@ RUN tar xzvf node-latest.tar.gz && cd node-v* && ./configure && make install
 RUN npm install -g sinopia
 
 ADD config.yaml config.yaml
-RUN mkdir storage
+RUN mkdir private_storage
+RUN mkdir public_storage
 RUN adduser --disabled-password --gecos "" sinopia
-RUN chown sinopia storage
+RUN chown sinopia private_storage
+RUN chown sinopia public_storage
 USER sinopia
 EXPOSE 4873
 CMD ["/usr/local/bin/sinopia"]
