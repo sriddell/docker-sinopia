@@ -1,6 +1,6 @@
 # DOCKER-VERSION 0.10.0
 
-FROM ubuntu:12.04
+FROM ubuntu:14.04
 
 RUN apt-get update
 RUN apt-get -y install git
@@ -10,14 +10,15 @@ RUN tar xzvf node-latest.tar.gz && cd node-v* && ./configure && make install
 
 RUN npm install -g sinopia
 
-ADD config.yaml config.yaml
-RUN mkdir private_storage
-RUN mkdir public_storage
-RUN adduser --disabled-password --gecos "" sinopia
-RUN chown sinopia private_storage
-RUN chown sinopia public_storage
-USER sinopia
+#ADD config.yaml config.yaml
+#RUN adduser --disabled-password --gecos "" sinopia
+#RUN chown sinopia storage
+#RUN chown sinopia config
+#USER sinopia
 EXPOSE 4873
-CMD ["/usr/local/bin/sinopia"]
+VOLUME ["/storage"]
+VOLUME ["/config"]
+
+CMD cd config && "/usr/local/bin/sinopia"
 
 
