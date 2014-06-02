@@ -190,6 +190,7 @@ logs:
 # it to be turned off in future versions. If `true`, latest tag is ignored,
 # and the highest semver is placed instead.
 #ignore_latest_tag: false
+```
 
 #nginx configuration
 
@@ -225,7 +226,11 @@ server {
         proxy_next_upstream error timeout invalid_header http_404 http_500 http_502 http_503 http_504;
 
         ### Set headers ###
-        include             proxy/headers;
+        proxy_set_header    Accept-Encoding     "";
+        proxy_set_header    X-Real-IP           $remote_addr;
+        proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;
+        proxy_set_header    X-Forwarded-Proto   $scheme;
+        add_header          Front-End-Https     on;
         proxy_set_header    Host            172.16.158.30;
     }
 }
@@ -246,7 +251,11 @@ server {
         proxy_redirect off;
 
         ### Set headers ###
-        include             proxy/headers;
+        proxy_set_header    Accept-Encoding     "";
+        proxy_set_header    X-Real-IP           $remote_addr;
+        proxy_set_header    X-Forwarded-For     $proxy_add_x_forwarded_for;
+        proxy_set_header    X-Forwarded-Proto   $scheme;
+        add_header          Front-End-Https     on;
         proxy_set_header    Host            registry.npmjs.org;
         proxy_set_header    Authorization   "";
     }
