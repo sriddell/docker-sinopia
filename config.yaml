@@ -1,5 +1,5 @@
 # path to a directory with all packages
-storage: ./public_storage
+storage: /storage
 
 # a list of users
 users:
