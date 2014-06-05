@@ -11,8 +11,6 @@ RUN tar xzvf node-latest.tar.gz && cd node-v* && ./configure && make install
 RUN npm install -g sinopia
 
 EXPOSE 4873
-VOLUME ["/storage"]
-VOLUME ["/config"]
 
 CMD cd config && "/usr/local/bin/sinopia"
 
